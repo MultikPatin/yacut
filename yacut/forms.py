@@ -13,6 +13,11 @@ class URLForm(FlaskForm):
     )
     custom_id = StringField(
         "Ваш вариант короткой ссылки",
-        validators=[Length(1, 16), Optional()],
+        validators=[
+            Length(
+                1, 16, message="Указано недопустимое имя для короткой ссылки"
+            ),
+            Optional(),
+        ],
     )
     submit = SubmitField("Добавить")
