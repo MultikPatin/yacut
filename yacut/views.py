@@ -25,7 +25,7 @@ def index_view():
         db.session.commit()
         short_link = url_for("index_view", _external=True) + url_map.short
         return render_template("index.html", form=form, short=short_link)
-    return render_template("index.html", form=form, short="")
+    return render_template("index.html", form=form)
 
 
 @app.route("/<string:short_id>", methods=["GET"])

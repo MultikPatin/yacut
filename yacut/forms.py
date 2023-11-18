@@ -1,6 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, URLField, SubmitField
-from wtforms.validators import DataRequired, Length, URL, Optional
+from wtforms.validators import (
+    DataRequired,
+    Length,
+    URL,
+    Optional,
+    ValidationError,
+)
 
 
 class URLForm(FlaskForm):
@@ -21,3 +27,9 @@ class URLForm(FlaskForm):
         ],
     )
     submit = SubmitField("Добавить")
+
+    def validate_custom_id(self, field):
+        if not field.data.isalpha() or not field.data.isascii():
+            raise ValidationError(
+                "Указано недопустимое имя для короткой ссылки"
+            )
